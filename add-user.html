@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BlogIt</title>
+    <!-- Link to external custom CSS file -->
+    <link rel="stylesheet" href="style.css">
+    <!-- iconscout CDN link -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <!-- Google Font: Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+
+
+<body>
+
+     <!--=============== BEGINNING OF NAVBAR =====================-->
+     <nav>
+        <div class="container nav__container">
+            <a href="index.html" class="nav__logo">BlogIt!</a>
+            <ul class="nav__items">
+            <li><a href="blog.html" class="nav__menu-link">Blog</a></li>
+            <li><a href="about.html" class="nav__menu-link">About</a></li>
+                <li><a href="services.html" class="nav__menu-link">Services</a></li>
+                <li><a href="contact.html" class="nav__menu-link">Contact</a></li>
+                <!-- <li><a href="signin.html" class="nav__menu-link">Signin</a></li> -->
+                <li class="nav__profile">
+                    <div class="avatar">
+                        <img src="./images/avatar1.jpg" alt="avatar">
+                    </div>
+                    <ul>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="logout.html">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <button id="open__nav-btn"><i class="uil uil-list-ul"></i></button>
+            <button id="close__nav-btn"><i class="uil uil-times-circle"></i></button>
+
+        </div>
+   </nav>
+   <!--=============== END OF NAVBAR =====================-->
+
+
+<section class="form__section">
+    <div class="container form__section-container">
+        <h2>Add User</h2>
+        <div class="alert__message error">
+            <p>This is an error message.</p>
+        </div>
+
+        <form action=""  enctype="multipart/form-data">
+            <input type="text" placeholder="First Name">
+            <input type="text" placeholder="Last Name">
+            <input type="text" placeholder="Username">
+            <input type="email" placeholder="Email">
+            <input type="password" placeholder="Create Password">
+            <input type="password" placeholder="Confirm Password">
+            <select>
+                <option value="0">Author</option>
+                <option value="1">Admin</option>
+            </select>
+            <div class="form__control">
+                <label for="avatar">User Avatar</label>
+                <input type="file" id="avatar">
+            </div>
+            <button type="submit" class="btn">Add User</button>
+           
+        </form>
+
+    
+    </div>
+</section>
+
+<!--================== BEGINNING OF FOOTER =====================-->
+
+<footer>
+          
+    <div class="footer__socials">
+        <a href="https://www.youtube.com/channel/UCInpwqGNe3AF_2oQ1VdCXhg" target="_blank">
+            <i class="uil uil-youtube"></i>
+        </a>
+
+        <a href="https://github.com/manisha-nair28" target="_blank">
+            <i class="uil uil-github"></i>
+        </a>
+
+        <a href="#" target="_blank">
+            <i class="uil uil-twitter"></i>
+        </a>
+
+        <a href="#" target="_blank">
+            <i class="uil uil-instagram"></i>
+        </a>
+
+        <a href="https://medium.com/@manisha-nair" target="_blank">
+            <i class="uil uil-medium-m"></i>
+        </a>
+
+        
+        <a href="https://manisha-nair28.github.io/" target="_blank">
+            <i class="uil uil-brackets-curly"></i>
+        </a>
+
+    </div>
+
+    <div class="container footer__container">
+        
+        <article>
+            <h4>Categories</h4>
+            <ul>
+                <li><a href="">Art</a></li>
+                <li><a href="">Lifestyle</a></li>
+                <li><a href="">Wild Life</a></li>
+                <li><a href="">Sports</a></li>
+                <li><a href="">Tech</a></li>
+            </ul>
+        </article>
+
+        <article>
+            <h4>Support</h4>
+            <ul>
+                <li><a href="">Online Support</a></li>
+                <li><a href="">Call</a></li>
+                <li><a href="">Emails</a></li>
+                <li><a href="">Social Support</a></li>
+                <li><a href="">Location</a></li>
+            </ul>
+        </article>
+
+        <article>
+            <h4>Blogs</h4>
+            <ul>
+                <li><a href="">Safety</a></li>
+                <li><a href="">Repair</a></li>
+                <li><a href="">Recent</a></li>
+                <li><a href="">Popular</a></li>
+                <li><a href="">Categories</a></li>
+            </ul>
+        </article>
+
+        <article>
+            <h4>Permalinks</h4>
+            <ul>
+                <li><a href="">Home</a></li>
+                <li><a href="">Blog</a></li>
+                <li><a href="">About</a></li>
+                <li><a href="">Services</a></li>
+                <li><a href="">Contact</a></li>
+            </ul>
+        </article>
+    </div>
+
+    <div class="footer__copyright">
+        <small>&copy; 2024 BlogIt! All Rights Reserved.</small>
+    </div>
+</footer>
+
+<!--================== END OF FOOTER =====================-->
+
+
+<script src="./main.js"></script>
+
+</body>
+</html>
