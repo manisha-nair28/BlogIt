@@ -11,7 +11,7 @@
         $id=filter_var($_POST['id'],FILTER_SANITIZE_NUMBER_INT);
         $title=filter_var($_POST['title'],FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $body=filter_var($_POST['body'],FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $category_id=filter_var($_POST['category_id'],FILTER_SANITIZE_NUMBER_INT);
+        $category_id=filter_var($_POST['category'],FILTER_SANITIZE_NUMBER_INT);
         $is_featured=filter_var($_POST['is_featured'],FILTER_SANITIZE_NUMBER_INT);
        
         $previous_thumbnail=filter_var($_POST['previous_thumbnail'],FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -47,7 +47,7 @@
             $extension = explode('.', $thumbnail_name);
             $extension = end($extension);
             
-            if(in_array($extension,$allowed_files)){
+            if(in_array($extension,$allowed_extensions)){
                 //make sure image is not too large.(2mb+)
                 if($thumbnail['size']<2000000){
                     //upload thumbnail
@@ -85,7 +85,7 @@
                 $result=mysqli_query($connection,$query);   
             }
     
-            if(!mysqli_errno($connection)){
+            if($result){
                 $_SESSION['edit-post-success']="Post updated successfully";
             }
     }

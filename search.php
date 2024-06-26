@@ -1,82 +1,48 @@
 <!--================== HEADER =====================-->
-<?php
+<?php 
     include 'partials/header.php';
 
-    //fetch featured post from DB
-    $featured_query = 'SELECT posts.*, categories.title AS category_name, users.first_name, users.last_name, users.avatar 
+    //check if the user entered something in the searchbar
+    if(isset($_GET['search']) && isset($_GET['submit'])){
+
+        // Step 1: Sanitizing input
+        $search = filter_var($_GET['search'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+        // Step 2: Escape input for SQL
+        $search = mysqli_real_escape_string($connection, $search);
+
+
+        $query = "SELECT posts.*, categories.title AS category_name, users.first_name, users.last_name, users.avatar 
                         FROM posts 
                         JOIN categories ON posts.category_id = categories.id 
-                        JOIN users ON posts.author_id = users.id 
-                        WHERE posts.is_featured = 1';
+                        JOIN users ON posts.author_id = users.id
+                        WHERE posts.title LIKE '%$search%' OR 
+                        posts.body LIKE '%$search%' OR 
+                        users.first_name LIKE '%$search%' OR
+                        users.last_name LIKE '%$search%'
+                        ORDER BY posts.date_time DESC";
 
-    $featured_result = mysqli_query($connection, $featured_query);
-    $featured_row = mysqli_fetch_assoc($featured_result);
 
-    //fetch recent 9 posts from DB
-    $query = 'SELECT posts.*, categories.title AS category_name, users.first_name, users.last_name, users.avatar 
-                        FROM posts 
-                        JOIN categories ON posts.category_id = categories.id 
-                        JOIN users ON posts.author_id = users.id 
-                        ORDER BY posts.date_time DESC LIMIT 9';
+    
+        $result = mysqli_query($connection, $query);
 
-    $result = mysqli_query($connection, $query);
-   
+    } else {
+        header('location: ' . ROOT_URL . 'blog.php');
+        die();
+    }
+
 ?>
 
-    <!--=============== BEGINNING OF SECTION: FEATURED POST =====================-->
+<!--================== END OF HEADER =====================-->
 
-    <!-- check if featured post exists -->
-    <?php if(mysqli_num_rows($featured_result)==1) : ?>
-    <section class="featured">
-        <div class="container featured__container">
-            <div class="post__thumbnail">
-                <img src="./images/blog_images/<?=$featured_row['thumbnail']?>" alt="featured-blog-thumbnail">
-            </div>
-            <div class="post__info">
-
-                <a href="<?=ROOT_URL?>category-posts.php?id=<?=$featured_row['category_id']?>" class="category__button">
-                    <?=$featured_row['category_name']?>
-                </a>
-
-                <h2 class="post__title">
-                    <a href="<?=ROOT_URL?>post.php?id=<?=$featured_row['id']?>">
-                        <?=$featured_row['title']?>
-                    </a>
-                </h2>
-
-                <p class="post__body">
-                    <?= substr($featured_row['body'], 0, 290) ?>.......
-                </p>
-
-                <div class="post__author">
-                    <div class="post__author-avatar">
-                        <img src="./images/avatar/<?=$featured_row['avatar']?>" alt="author-image">
-                    </div>
-                    <div class="post__author-info">
-                        <h5>
-                            By: 
-                            <?= 
-                                "{$featured_row['first_name']} {$featured_row['last_name']}"
-                            ?>
-                        </h5>
-                        <small>
-                            <?= date("M d, Y - g:i A", strtotime($featured_row['date_time']))  ?>
-                        </small>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-    <?php endif ?>
-
-    <!--=============== END OF SECTION: FEATURED POST =====================-->
 
 
     <!--=============== BEGINNING OF SECTION: POSTS =====================-->
 
-    <!-- show recent 9 posts -->
-    <section class="posts  <?= $featured_row ? '' : 'section__extra-margin'   ?>" >
+
+    <!--=== CHECK IF RESULTS FOR THE SEARCHED TERM EXISTS ===-->
+    <?php if(mysqli_num_rows($result)>0) : ?>
+    <section class="posts  section__extra-margin" >
         <div class="container posts__container">
 
             <!-- ============ ARTICLES ============== -->
@@ -125,11 +91,25 @@
                 </div>
             </article>
             <?php endwhile ?>
-           
-           
+
 
         </div>
     </section>
+
+
+    <!--==== ERROR MESSAGE IF NO RESULT FOUND  ====-->
+    <?php 
+        else :
+    ?>  
+        <div class="alert__message error lg section__extra-margin">
+            <p>
+                <?= "No matching results found for the searched term: $search!" ?>
+            </p>
+        </div>
+    <?php
+        endif
+    ?>
+
 
     <!--=============== END OF SECTION: POSTS =====================-->
 
@@ -138,8 +118,6 @@
     <!--================== BEGINNING OF SECTION: CATEGORY BUTTONS =====================-->
     <section class="category__buttons">
         <div class="container category__buttons-container">
-
-
             <!--=== FETCH ALL CATEGORIES FROM DB ===-->
             <?php 
                 $category_query = "SELECT * FROM categories";
@@ -152,14 +130,14 @@
                 </a>
             
             <?php endwhile ?>
-
-
         </div>
     </section>
     <!--================== END OF SECTION: CATEGORY BUTTONS =====================-->
     
 
+
     <!--================== FOOTER =====================-->
     <?php
         include 'partials/footer.php';
     ?>
+    <!--================== FOOTER END=====================-->

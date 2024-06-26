@@ -1,3 +1,5 @@
+
+
 <!--================== BEGINNING OF FOOTER =====================-->
 
 <footer>
@@ -11,11 +13,11 @@
                   <i class="uil uil-github"></i>
               </a>
 
-              <a href="#" target="_blank">
+              <a href="https://x.com/Nisha_ya_?t=SAie2pLcDekffeo_6tFG6A&s=08" target="_blank">
                   <i class="uil uil-twitter"></i>
               </a>
 
-              <a href="#" target="_blank">
+              <a href="https://www.instagram.com/manishaa_nair_/?utm_source=ig_web_button_share_sheet" target="_blank">
                   <i class="uil uil-instagram"></i>
               </a>
 
@@ -34,12 +36,22 @@
               
               <article>
                   <h4>Categories</h4>
+
+
+                  <!-- FETCH TOP 5 CATEGORIES FROM DB -->
+                  <?php 
+                    $category_query = "SELECT * FROM categories LIMIT 5";
+                    $category_result = mysqli_query($connection, $category_query);
+                  ?>
+
                   <ul>
-                      <li><a href="">Art</a></li>
-                      <li><a href="">Lifestyle</a></li>
-                      <li><a href="">Wild Life</a></li>
-                      <li><a href="">Sports</a></li>
-                      <li><a href="">Tech</a></li>
+                    <?php while($category_row = mysqli_fetch_assoc($category_result)) : ?>
+                      <li>
+                        <a href="<?=ROOT_URL?>category-posts.php?id=<?=$category_row['id']?>" >
+                            <?=$category_row['title']?>
+                        </a>
+                    </li>
+                    <?php endwhile ?>
                   </ul>
               </article>
 
@@ -59,7 +71,7 @@
                   <ul>
                       <li><a href="">Safety</a></li>
                       <li><a href="">Repair</a></li>
-                      <li><a href="">Recent</a></li>
+                      <li><a href="<?= ROOT_URL ?>blog.php">Recent</a></li>
                       <li><a href="">Popular</a></li>
                       <li><a href="">Categories</a></li>
                   </ul>
@@ -68,11 +80,11 @@
               <article>
                   <h4>Permalinks</h4>
                   <ul>
-                      <li><a href="">Home</a></li>
-                      <li><a href="">Blog</a></li>
-                      <li><a href="">About</a></li>
-                      <li><a href="">Services</a></li>
-                      <li><a href="">Contact</a></li>
+                      <li><a href="<?= ROOT_URL ?>">Home</a></li>
+                      <li><a href="<?= ROOT_URL ?>blog.php">Blog</a></li>
+                      <li><a href="<?= ROOT_URL ?>about.php">About</a></li>
+                      <li><a href="<?= ROOT_URL ?>services.php">Services</a></li>
+                      <li><a href="<?= ROOT_URL ?>contact.php">Contact</a></li>
                   </ul>
               </article>
           </div>

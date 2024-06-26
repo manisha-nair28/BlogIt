@@ -30,6 +30,54 @@
             </p>
         </div>
 
+    <!--==== SUCCESS MESSAGE FOR SUCCESSFULL POST UPDATE | EDIT  ====-->
+    <?php
+        elseif(isset($_SESSION['edit-post-success'])) :
+    ?>
+            <div class="alert__message success container">
+                <p>
+                    <?= $_SESSION['edit-post-success']; 
+                        unset($_SESSION['edit-post-success']);
+                    ?>
+                </p>
+            </div>
+
+    <!--==== ERROR MESSAGE IF POST UPDATE | EDIT FAILS  ====-->
+    <?php
+        elseif(isset($_SESSION['edit-post'])) :
+    ?>
+            <div class="alert__message error container">
+                <p>
+                    <?= $_SESSION['edit-post']; 
+                        unset($_SESSION['edit-post']);
+                    ?>
+                </p>
+            </div>
+
+     <!--==== SUCCESS MESSAGE FOR SUCCESSFULL POST DELETION ====-->
+     <?php
+        elseif(isset($_SESSION['delete-post-success'])) :
+    ?>
+        <div class="alert__message success container">
+            <p>
+                <?= $_SESSION['delete-post-success']; 
+                    unset($_SESSION['delete-post-success']);
+                ?>
+            </p>
+        </div>
+
+
+    <!--==== ERROR MESSAGE IF DELETE POST FAILS  ====-->
+    <?php
+        elseif(isset($_SESSION['delete-post'])) :
+    ?>
+        <div class="alert__message error container">
+            <p>
+                <?= $_SESSION['delete-post']; 
+                    unset($_SESSION['delete-post']);
+                ?>
+            </p>
+        </div>
 
     <?php
         endif
