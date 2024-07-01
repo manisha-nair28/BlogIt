@@ -414,6 +414,23 @@ footer ul a:hover {
 
 }
 
+/* ======================== LISTEN TO POST/AUDIO BUTTON ======================== */
+.listen__button {
+    background: var(--color-primary-light);
+    color: var(--color-white);
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: var(--card-border-radius-2);
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.listen__button:hover {
+   
+    color: var(--color-primary);
+}
+
 /* ======================== CATEGORY POSTS ======================== */
 .category__title{
     height: 15rem;

@@ -28,7 +28,7 @@
 
     <section class="singlepost">
         <div class="container singlepost__container">
-            <h2> 
+            <h2 id="post-title"> 
                 <?=$row['title']?>
             </h2>
 
@@ -48,13 +48,25 @@
                         <?= date("M d, Y - g:i A", strtotime($row['date_time']))  ?>
                     </small>
                 </div>
+
+                <div>
+                    <button class="category__button" id="readButton" onclick="speakPost()">
+                        Listen to Post  <i class="uil uil-volume"></i>
+                    </button>
+                    <button class="category__button" id="pauseButton" onclick="pauseSpeech()" style="display:none;">
+                        Pause   <i class="uil uil-pause-circle"></i>
+                    </button>
+                    <button class="category__button" id="resumeButton" onclick="resumeSpeech()" style="display:none;">Resume
+                        <i class="uil uil-play-circle"></i>
+                    </button>
+                </div>
             </div>
 
             <div class="singlepost__thumbnail">
                 <img src="./images/blog_images/<?=$row['thumbnail']?>" alt="blog-thumbnail">
             </div>
 
-            <p>
+            <p id="post-content">
                 <?=$row['body']?> 
             </p>
            
@@ -63,8 +75,13 @@
     
     <!--================== END OF SINGLE POST =====================-->
 
+    
+    <!--========== JavaScript file for speech synthesis api =======-->
+    <script src="./js/speechsynthesis.js"></script>
 
-     <!--================== FOOTER =====================-->
+    <!--================== FOOTER =====================-->
     <?php
         include 'partials/footer.php';
     ?>
+
+
