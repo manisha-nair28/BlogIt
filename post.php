@@ -67,7 +67,7 @@
             </div>
 
             <p id="post-content">
-                <?=$row['body']?> 
+            <?= nl2br(htmlspecialchars_decode($row['body'])) ?>
             </p>
            
         </div>
